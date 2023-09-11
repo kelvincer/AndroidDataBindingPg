@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/ticketRegisterFragment">
+
+    <fragment
+        android:id="@+id/ticketRegisterFragment"
+        android:name="com.keliceru.challengeprosegur.presentation.fragments.RegisterFragment"
+        android:label="fragment_ticket_register"
+        tools:layout="@layout/fragment_register" />
+
+    <fragment
+        android:id="@+id/registeredUsersFragment"
+        android:name="com.keliceru.challengeprosegur.presentation.fragments.UsersFragment"
+        android:label="fragment_registered_users"
+        tools:layout="@layout/fragment_registered_users" />
+
+</navigation>

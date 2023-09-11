@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.keliceru.challengeprosegur.presentation.viewmodels.RegisterViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context=".presentation.fragments.RegisterFragment">
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@{ viewModel.state.showTopMessage ? String.format(@string/available_seats, viewModel.state.roomNumber, viewModel.state.availableSeats, viewModel.state.day) : ``}"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="@{ viewModel.state.showTopMessage ? View.VISIBLE : View.GONE }"
+            app:layout_constraintBottom_toTopOf="@id/scv_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/scv_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_message">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/sv_room_number"
+                    layout="@layout/selector_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:clickAction="@{viewModel.onSelectedRoom}"
+                    app:hint="@{@string/room_number}"
+                    app:items="@{viewModel.state.roomsNumber}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:text="@={viewModel.state.roomNumber}" />
+
+                <include
+                    android:id="@+id/sv_week_day"
+                    layout="@layout/selector_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:clickAction="@{viewModel.onSelectedDay}"
+                    app:hint="@{@string/day_of_week}"
+                    app:items="@{viewModel.state.days}"
+                    app:layout_constraintTop_toBottomOf="@id/sv_room_number"
+                    app:text="@={viewModel.state.day}" />
+
+                <include
+                    android:id="@+id/tf_movie"
+                    layout="@layout/text_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:afterTextChanged="@{viewModel.onError}"
+                    app:hint="@{@string/movie}"
+                    app:layout_constraintTop_toBottomOf="@id/sv_week_day"
+                    app:value="@={viewModel.state.movie}" />
+
+                <include
+                    android:id="@+id/tf_unit_price"
+                    layout="@layout/text_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:afterTextChanged="@{viewModel.onError}"
+                    app:hint="@{@string/ticket_price}"
+                    app:inputType="@{`numberDecimal`}"
+                    app:layout_constraintTop_toBottomOf="@id/tf_movie"
+                    app:value="@={viewModel.state.price}" />
+
+                <include
+                    android:id="@+id/tf_amount"
+                    layout="@layout/text_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:afterTextChanged="@{viewModel.onError}"
+                    app:hint="@{@string/ticket_amount}"
+                    app:inputType="@{`number`}"
+                    app:layout_constraintTop_toBottomOf="@id/tf_unit_price"
+                    app:seat="@{true}"
+                    app:seatNumber="@{viewModel.state.availableSeats}"
+                    app:value="@={viewModel.state.quantity}" />
+
+                <include
+                    android:id="@+id/tf_dni"
+                    layout="@layout/text_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:afterTextChanged="@{viewModel.onError}"
+                    app:hint="@{@string/person_identification}"
+                    app:inputType="@{`number`}"
+                    app:layout_constraintTop_toBottomOf="@id/tf_amount"
+                    app:value="@={viewModel.state.dni}" />
+
+                <Button
+                    android:id="@+id/bn_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:enabled="@{viewModel.state.error ? false : true}"
+                    android:onClick="@{() -> viewModel.registerNewClient()}"
+                    android:text="@string/register"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toBottomOf="@id/tf_dni" />
+
+                <TextView
+                    android:id="@+id/tv_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{viewModel.state.message}"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bn_register" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+
+
+

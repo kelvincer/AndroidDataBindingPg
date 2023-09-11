@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        
+        <import type="kotlin.jvm.functions.Function1"/>
+        
+        <import type="kotlin.Unit"/>
+
+        <variable
+            name="hint"
+            type="java.lang.String" />
+
+        <variable
+            name="inputType"
+            type="java.lang.String" />
+
+        <variable
+            name="value"
+            type="String" />
+
+        <variable
+            name="seatNumber"
+            type="Integer" />
+
+        <variable
+            name="seat"
+            type="Boolean" />
+        
+        <variable
+            name="afterTextChanged"
+            type="Function1&lt;String, Unit>" />
+
+    </data>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_movie"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@{hint}"
+        app:helperTextEnabled="true"
+        app:helperTextTextColor="@android:color/holo_red_dark"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="@{inputType, default=`text`}"
+            android:afterTextChanged="@{(s) -> afterTextChanged.invoke(s.toString()) }"
+            android:text="@={value}"
+            app:textInput="@{tilMovie}"
+            app:availableSeats="@{seatNumber ?? 0}"
+            app:seat="@{seat ?? false}" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</layout>

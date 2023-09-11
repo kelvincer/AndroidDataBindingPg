@@ -1,0 +1,12 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ChallengeProsegur" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">#F7C500</item>
+        <item name="colorSecondaryContainer">#FFFFED</item>
+    </style>
+
+    <style name="Theme.ChallengeProsegur" parent="Base.Theme.ChallengeProsegur"/>
+
+</resources>

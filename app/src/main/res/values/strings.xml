@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ChallengeProsegur</string>
+
+
+    <string name="item_menu_register">Registrar</string>
+    <string name="item_menu_users">Usuarios</string>
+
+    <string name="room_number">Número de sala</string>
+    <string name="day_of_week">Selecciona el día</string>
+    <string name="movie">Película</string>
+    <string name="ticket_price">Costo unitario</string>
+    <string name="ticket_amount">Cantidad de entradas</string>
+    <string name="person_identification">DNI</string>
+    <string name="register">Registrar</string>
+    <string name="required_field">Este campo es requerido</string>
+    <string name="available_seats">En la sala %s quedan %s asientos disponibles para el %s</string>
+    <string name="available_seats_exceed">No hay suficientes asientos disponibles</string>
+    <string name="discard">Descartar</string>
+    <string name="total_cost">Importe: S/. %s</string>
+    <string name="identification">DNI: %s</string>
+    <string name="empty_list">No tenemos usuarios registrados</string>
+</resources>
